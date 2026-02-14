@@ -5,16 +5,16 @@ import { useStore } from '../store/useStore';
 
 const AuthView: React.FC = () => {
   return (
-    <div className="max-w-md mx-auto px-4 py-20">
-      <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
-        <div className="bg-indigo-600 px-8 py-10 text-center">
-          <Link to="/" className="inline-flex items-center space-x-2 mb-6">
+    <div className="max-w-md mx-auto px-3 sm:px-4 py-12 sm:py-20 overflow-x-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+        <div className="bg-indigo-600 dark:bg-indigo-700 px-6 sm:px-8 py-8 sm:py-10 text-center">
+          <Link to="/" className="inline-flex items-center space-x-2 mb-4 sm:mb-6">
             <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-indigo-600 font-bold text-xl">L</div>
-            <span className="text-2xl font-bold tracking-tight text-white">LUMINA</span>
+            <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">LUMINA</span>
           </Link>
-          <h2 className="text-white font-bold text-xl opacity-90">Welcome to Premium Shopping</h2>
+          <h2 className="text-white font-bold text-lg sm:text-xl opacity-90">Welcome to Premium Shopping</h2>
         </div>
-        <div className="p-8">
+        <div className="p-6 sm:p-8">
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
@@ -39,23 +39,23 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
         <input 
           type="email" 
           required 
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+          className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400 dark:placeholder-gray-500" 
         />
       </div>
       <div>
-        <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
+        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Password</label>
         <input 
           type="password" 
           required 
           placeholder="••••••••"
-          className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" 
+          className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400 dark:placeholder-gray-500" 
         />
       </div>
       <button className="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-700 active:scale-95 transition-all">
@@ -121,3 +121,5 @@ const RegisterForm = () => {
 };
 
 export default AuthView;
+
+

@@ -24,7 +24,7 @@ const CategoryView: React.FC = () => {
 
   if (!category) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-20 text-center">
         <h2 className="text-2xl font-bold">Category not found</h2>
         <Link to="/" className="text-indigo-600 mt-4 block">Back to Home</Link>
       </div>
@@ -32,18 +32,18 @@ const CategoryView: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden mb-10 shadow-sm border border-gray-100 dark:border-gray-700">
-        <div className="relative h-64 md:h-80">
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 overflow-x-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl md:rounded-3xl overflow-hidden mb-10 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="relative h-48 sm:h-64 md:h-80">
           <img 
             src={category.image} 
             alt={category.name} 
             className="absolute inset-0 w-full h-full object-cover" 
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
-          <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-12">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white capitalize mb-4">{category.name}</h1>
-            <p className="text-gray-200 text-lg max-w-2xl">Browse our latest collection in {category.name}. From premium essentials to daily favorites.</p>
+          <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-8 md:px-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white capitalize mb-2 sm:mb-4">{category.name}</h1>
+            <p className="text-gray-200 text-base sm:text-lg max-w-2xl">Browse our latest collection in {category.name}. From premium essentials to daily favorites.</p>
           </div>
         </div>
       </div>
@@ -110,3 +110,5 @@ const CategoryView: React.FC = () => {
 };
 
 export default CategoryView;
+
+

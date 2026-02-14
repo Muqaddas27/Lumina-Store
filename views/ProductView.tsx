@@ -13,7 +13,7 @@ const ProductView: React.FC = () => {
 
   if (!product) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-20 text-center">
         <h2 className="text-2xl font-bold">Product not found</h2>
         <Link to="/" className="text-indigo-600 mt-4 block">Back to Home</Link>
       </div>
@@ -24,7 +24,7 @@ const ProductView: React.FC = () => {
   const relatedProducts = INITIAL_PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 lg:py-16 overflow-x-hidden">
       <nav className="flex mb-8 text-sm text-gray-500 dark:text-gray-400" aria-label="Breadcrumb">
         <Link to="/" className="hover:text-indigo-600 dark:hover:text-indigo-400">Home</Link>
         <span className="mx-2">/</span>
@@ -59,21 +59,21 @@ const ProductView: React.FC = () => {
         </div>
 
         {/* Product Info */}
-        <div className="mt-10 lg:mt-0 px-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100">{product.name}</h1>
+        <div className="mt-10 lg:mt-0">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100">{product.name}</h1>
             <div className="flex items-center space-x-1">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className={`text-lg ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}>★</span>
+                <span key={i} className={`text-base sm:text-lg ${i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}>★</span>
               ))}
-              <span className="text-gray-500 dark:text-gray-400 text-sm ml-2">({product.reviewsCount} reviews)</span>
+              <span className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm ml-2">({product.reviewsCount} reviews)</span>
             </div>
           </div>
 
-          <div className="mt-6 flex items-baseline">
-            <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">${(product.salePrice || product.price).toFixed(2)}</p>
+          <div className="mt-6 flex items-baseline flex-wrap gap-2">
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">${(product.salePrice || product.price).toFixed(2)}</p>
             {product.salePrice && (
-              <p className="ml-4 text-xl text-gray-400 dark:text-gray-500 line-through">${product.price.toFixed(2)}</p>
+              <p className="ml-2 text-lg sm:text-xl text-gray-400 dark:text-gray-500 line-through">${product.price.toFixed(2)}</p>
             )}
           </div>
 
@@ -142,3 +142,5 @@ const ProductView: React.FC = () => {
 };
 
 export default ProductView;
+
+

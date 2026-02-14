@@ -9,6 +9,13 @@
     <script>
       tailwind.config = {
         darkMode: 'class',
+        theme: {
+          extend: {
+            screens: {
+              'xs': '475px',
+            },
+          },
+        },
       }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +47,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 overflow-x-hidden">
     <div id="root"></div>
 <script type="module" src="/index.tsx"></script>
 </body>

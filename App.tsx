@@ -33,12 +33,12 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <Router>
-        <div className="min-h-screen flex flex-col font-sans bg-gray-50 dark:bg-gray-900 text-slate-900 dark:text-gray-100 transition-colors duration-200">
+        <div className="min-h-screen flex flex-col font-sans bg-gray-50 dark:bg-gray-900 text-slate-900 dark:text-gray-100 transition-colors duration-200 overflow-x-hidden">
           <ScrollToTop />
           <Header />
           <CartDrawer />
           
-          <main className="flex-grow">
+          <main className="flex-grow pt-[88px] sm:pt-[96px]">
             <Routes>
               <Route path="/" element={<HomeView />} />
               <Route path="/products/:slug" element={<ProductView />} />

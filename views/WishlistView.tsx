@@ -8,10 +8,10 @@ const WishlistView: React.FC = () => {
   const { wishlist } = useStore();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="flex justify-between items-center mb-10">
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 overflow-x-hidden">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-10">
         <div>
-          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100">My Wishlist</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100">My Wishlist</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-2">{wishlist.length} {wishlist.length === 1 ? 'item' : 'items'} saved for later.</p>
         </div>
         <Link to="/" className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Continue Shopping</Link>
@@ -44,3 +44,5 @@ const WishlistView: React.FC = () => {
 };
 
 export default WishlistView;
+
+

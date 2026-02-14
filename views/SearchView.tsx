@@ -24,9 +24,9 @@ const SearchView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 overflow-x-hidden">
       <div className="mb-12">
-        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">Search Results</h1>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">Search Results</h1>
         <form onSubmit={handleSearch} className="max-w-2xl relative">
           <input 
             type="text" 
@@ -67,3 +67,5 @@ const SearchView: React.FC = () => {
 };
 
 export default SearchView;
+
+

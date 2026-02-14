@@ -10,7 +10,7 @@ const AdminView: React.FC = () => {
 
   if (user?.role !== 'ADMIN') {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-20 text-center">
         <h2 className="text-2xl font-bold text-red-600">Access Denied</h2>
         <p className="text-gray-500 mt-2">You need administrator privileges to view this page.</p>
         <Link to="/" className="text-indigo-600 mt-4 block underline">Return to Shop</Link>
@@ -26,16 +26,16 @@ const AdminView: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="flex flex-col md:flex-row gap-8">
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 overflow-x-hidden">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
         {/* Sidebar */}
         <nav className="w-full md:w-64 space-y-2 flex-shrink-0">
-          <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest px-4 mb-4">Admin Console</h2>
+          <h2 className="text-xs sm:text-sm font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest px-4 mb-4">Admin Console</h2>
           {navItems.map((item) => (
             <Link 
               key={item.path}
               to={item.path}
-              className={`block px-4 py-3 rounded-xl font-medium transition-all ${location.pathname === item.path ? 'bg-indigo-600 text-white shadow-lg' : 'text-gray-600 hover:bg-white hover:text-indigo-600'}`}
+              className={`block px-4 py-3 rounded-xl font-medium transition-all ${location.pathname === item.path ? 'bg-indigo-600 dark:bg-indigo-700 text-white shadow-lg' : 'text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400'}`}
             >
               {item.label}
             </Link>
@@ -43,11 +43,11 @@ const AdminView: React.FC = () => {
         </nav>
 
         {/* Content */}
-        <div className="flex-1 bg-white rounded-3xl shadow-sm border border-gray-100 p-8 min-h-[600px]">
+        <div className="flex-1 bg-white dark:bg-gray-800 rounded-2xl md:rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 md:p-8 min-h-[600px]">
           <Routes>
             <Route path="/" element={<AdminDashboard />} />
             <Route path="/products" element={<AdminProducts />} />
-            <Route path="*" element={<div className="py-20 text-center text-gray-500 italic">This module is coming soon in the next update.</div>} />
+            <Route path="*" element={<div className="py-20 text-center text-gray-500 dark:text-gray-400 italic">This module is coming soon in the next update.</div>} />
           </Routes>
         </div>
       </div>
@@ -151,3 +151,5 @@ const AdminProducts = () => {
 };
 
 export default AdminView;
+
+

@@ -33,19 +33,19 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full glass-morphism border-b border-gray-200 dark:border-gray-700 dark:bg-gray-800/90">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-md">
         {/* Top Bar */}
         <div className="bg-indigo-600 dark:bg-indigo-700 text-white text-center py-2 text-xs sm:text-sm font-medium">
-          <span>Free shipping on orders over $150 | 30-Day Returns</span>
+          <span className="block truncate px-2">Free shipping on orders over $150 | 30-Day Returns</span>
         </div>
 
         {/* Main Header */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+        <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 w-full">
+          <div className="flex justify-between items-center h-14 sm:h-16 gap-3 sm:gap-4">
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+              className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 flex-shrink-0"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isMobileMenuOpen ? (
@@ -57,63 +57,71 @@ const Header: React.FC = () => {
             </button>
 
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">L</div>
-              <span className="text-xl font-bold tracking-tight text-indigo-600 hidden sm:block">LUMINA</span>
+            <Link to="/" className="flex items-center space-x-2 flex-shrink-0 min-w-0">
+              <div className="w-8 h-8 bg-indigo-600 dark:bg-indigo-700 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">L</div>
+              <span className="text-lg sm:text-xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400 hidden sm:block truncate">LUMINA</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden md:flex space-x-3 lg:space-x-6 xl:space-x-8 flex-shrink-0">
               <Link to="/" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                 Home
               </Link>
               <div className="relative group">
-                <button className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1">
+                <button className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1 whitespace-nowrap">
                   <span>Categories</span>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
                 {/* Categories Dropdown */}
-                <div className="absolute left-0 w-56 mt-2 py-2 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  {CATEGORIES.map((cat) => (
-                    <Link 
-                      key={cat.id}
-                      to={`/category/${cat.slug}`} 
-                      className="flex items-center px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                    >
-                      <img src={cat.image} alt={cat.name} className="w-10 h-10 rounded-lg mr-3 object-cover" />
-                      <span className="font-medium">{cat.name}</span>
-                    </Link>
-                  ))}
+                <div className="absolute left-0 w-[520px] min-w-[420px] max-w-none mt-2 p-4 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100]">
+                  <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 px-2">Shop by Category</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {CATEGORIES.map((cat) => (
+                      <Link 
+                        key={cat.id}
+                        to={`/category/${cat.slug}`} 
+                        className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-lg transition-all duration-200 group/item"
+                      >
+                        <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 ring-2 ring-gray-100 dark:ring-gray-700 group-hover/item:ring-indigo-400 dark:group-hover/item:ring-indigo-500 transition-all">
+                          <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+                        </div>
+                        <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 group-hover/item:text-indigo-600 dark:group-hover/item:text-indigo-400 transition-colors">{cat.name}</span>
+                      </Link>
+                    ))}
+                  </div>
                   <Link 
                     to="/search?q=" 
-                    className="block px-4 py-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 border-t border-gray-100 dark:border-gray-700 mt-2"
+                    className="mt-4 flex items-center justify-center gap-2 w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 rounded-xl transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5"
                   >
-                    View All Products →
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    <span>Browse All Products</span>
                   </Link>
                 </div>
               </div>
-              <Link to="/about" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+              <Link to="/about" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors whitespace-nowrap">
                 About
               </Link>
-              <Link to="/contact" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+              <Link to="/contact" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors whitespace-nowrap">
                 Contact
               </Link>
             </nav>
 
             {/* Right Side Actions */}
-            <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 flex-shrink-0 ml-auto">
               {/* Desktop Search */}
-              <form onSubmit={handleSearch} className="hidden lg:block relative">
+              <form onSubmit={handleSearch} className="hidden lg:block relative flex-shrink-0">
                 <input 
                   type="text" 
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search products..."
-                  className="bg-gray-100 dark:bg-gray-700 dark:text-gray-100 border-none rounded-full px-4 py-2 text-sm w-48 focus:w-64 transition-all duration-300 focus:ring-2 focus:ring-indigo-500"
+                  className="bg-gray-100 dark:bg-gray-700 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 border-none rounded-full px-4 py-2 text-sm w-48 xl:w-56 focus:w-64 xl:focus:w-72 transition-all duration-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -123,7 +131,7 @@ const Header: React.FC = () => {
               {/* Mobile Search Button */}
               <button 
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="lg:hidden p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
+                className="lg:hidden p-1.5 sm:p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -133,7 +141,7 @@ const Header: React.FC = () => {
               {/* Dark Mode Toggle */}
               <button 
                 onClick={toggleTheme}
-                className="p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
+                className="p-1.5 sm:p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors hidden xs:block"
                 aria-label="Toggle Dark Mode"
               >
                 {theme === 'dark' ? (
@@ -148,8 +156,8 @@ const Header: React.FC = () => {
               </button>
 
               {/* Wishlist */}
-              <Link to="/wishlist" className="relative p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors hidden sm:block">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <Link to="/wishlist" className="relative p-2 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors hidden md:block">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
                 {wishlistCount > 0 && (
@@ -175,7 +183,7 @@ const Header: React.FC = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  <div className="absolute right-0 w-56 mt-2 py-2 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
+                  <div className="absolute right-0 w-56 mt-2 py-2 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50">
                     <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
                       <p className="text-sm font-bold text-gray-900 dark:text-gray-100">{user.name}</p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{user.email}</p>
@@ -199,23 +207,26 @@ const Header: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                <Link to="/auth/login" className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 dark:bg-indigo-700 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors">
-                  Login
+                <Link to="/auth/login" className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white bg-indigo-600 dark:bg-indigo-700 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-all shadow-sm hover:shadow-md whitespace-nowrap">
+                  <span className="hidden xs:inline">Login</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 xs:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
                 </Link>
               )}
 
               {/* Cart */}
               <button 
                 onClick={toggleCart}
-                className="relative px-4 py-2 text-sm font-medium text-white bg-indigo-600 dark:bg-indigo-700 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-colors"
+                className="relative px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white bg-indigo-600 dark:bg-indigo-700 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-all shadow-sm hover:shadow-md whitespace-nowrap"
               >
-                <span className="flex items-center space-x-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <span className="flex items-center space-x-1.5 sm:space-x-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
-                  <span>Cart</span>
+                  <span className="hidden xs:inline">Cart</span>
                   {cartCount > 0 && (
-                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-white bg-red-500 dark:bg-red-600 rounded-full">
+                    <span className="absolute -top-1 -right-1 xs:static xs:inline-flex items-center justify-center px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-xs font-bold leading-none text-white bg-red-500 dark:bg-red-600 rounded-full min-w-[18px] sm:min-w-[20px]">
                       {cartCount}
                     </span>
                   )}
@@ -226,14 +237,14 @@ const Header: React.FC = () => {
 
           {/* Mobile Search Bar */}
           {isSearchOpen && (
-            <div className="lg:hidden pb-4 animate-fade-in">
+            <div className="lg:hidden pb-4 pt-2 animate-fade-in">
               <form onSubmit={handleSearch} className="relative">
                 <input 
                   type="text" 
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search products..."
-                  className="w-full bg-gray-100 dark:bg-gray-700 dark:text-gray-100 border-none rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500"
+                  className="w-full bg-gray-100 dark:bg-gray-700 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 border-none rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                   autoFocus
                 />
                 <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400">
@@ -249,7 +260,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-50" onClick={closeMobileMenu}>
+        <div className="md:hidden fixed inset-0 z-[60] bg-black bg-opacity-50 backdrop-blur-sm" onClick={closeMobileMenu}>
           <div 
             className="absolute left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-gray-800 shadow-2xl overflow-y-auto"
             onClick={(e) => e.stopPropagation()}

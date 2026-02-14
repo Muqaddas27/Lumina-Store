@@ -11,11 +11,11 @@ const AccountView: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="flex flex-col md:flex-row gap-8">
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 overflow-x-hidden">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
         {/* Sidebar */}
         <nav className="w-full md:w-64 space-y-2 flex-shrink-0">
-          <div className="flex items-center space-x-3 px-4 mb-8">
+          <div className="flex items-center space-x-3 px-4 mb-6 md:mb-8">
             <div className="w-12 h-12 rounded-full border border-gray-200 dark:border-gray-600 flex items-center justify-center text-sm font-bold text-white bg-indigo-600">
               {user.image ? <img src={user.image} className="w-full h-full rounded-full object-cover" alt={user.name} /> : user.name.charAt(0).toUpperCase()}
             </div>
@@ -32,7 +32,7 @@ const AccountView: React.FC = () => {
         </nav>
 
         {/* Content */}
-        <div className="flex-1 bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-8 min-h-[500px]">
+        <div className="flex-1 bg-white dark:bg-gray-800 rounded-2xl md:rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 md:p-8 min-h-[500px]">
           <Routes>
             <Route path="/" element={<ProfileOverview user={user} />} />
             <Route path="/edit" element={<EditProfile user={user} />} />
@@ -296,3 +296,5 @@ const OrdersList = () => {
 };
 
 export default AccountView;
+
+

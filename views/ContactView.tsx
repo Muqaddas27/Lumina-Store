@@ -10,11 +10,11 @@ const ContactView: React.FC = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-950 transition-colors min-h-screen">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight">Get in Touch</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+    <div className="bg-white dark:bg-gray-950 transition-colors min-h-screen overflow-x-hidden">
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-12 sm:py-16">
+      <div className="text-center mb-12 sm:mb-16">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight">Get in Touch</h1>
+        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Have a question about an order or want to learn more about our products? 
           Our team is here to help you every step of the way.
         </p>
@@ -134,3 +134,5 @@ const ContactView: React.FC = () => {
 };
 
 export default ContactView;
+
+

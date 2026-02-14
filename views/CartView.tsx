@@ -11,7 +11,7 @@ const CartView: React.FC = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-20 text-center">
+      <div className="max-w-3xl mx-auto px-2 sm:px-3 lg:px-6 py-20 text-center">
         <div className="mb-8 flex justify-center">
           <div className="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 dark:text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,8 +29,8 @@ const CartView: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-10">Shopping Cart ({cart.length} items)</h1>
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 overflow-x-hidden">
+      <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-10">Shopping Cart ({cart.length} items)</h1>
       
       <div className="lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start">
         <div className="lg:col-span-8">
@@ -45,23 +45,23 @@ const CartView: React.FC = () => {
                   <div className="sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
                     <div>
                       <div className="flex justify-between">
-                        <h3 className="text-lg font-bold text-gray-900 hover:text-indigo-600">
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 hover:text-indigo-600 dark:hover:text-indigo-400">
                           <Link to={`/products/${item.slug}`}>{item.name}</Link>
                         </h3>
                       </div>
-                      <p className="mt-1 text-sm text-gray-500 capitalize">{item.category}</p>
-                      <p className="mt-2 text-base font-bold text-gray-900">
+                      <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 capitalize">{item.category}</p>
+                      <p className="mt-2 text-base font-bold text-gray-900 dark:text-gray-100">
                         ${(item.salePrice || item.price).toFixed(2)}
                       </p>
                     </div>
 
-                    <div className="mt-4 sm:mt-0 flex items-center justify-between sm:justify-end space-x-6">
-                      <div className="flex items-center border border-gray-200 rounded-xl px-3 py-1 bg-white">
-                        <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="p-1 text-gray-400 hover:text-indigo-600">-</button>
-                        <span className="mx-4 font-bold text-gray-900 w-4 text-center">{item.quantity}</span>
-                        <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="p-1 text-gray-400 hover:text-indigo-600">+</button>
+                    <div className="mt-4 sm:mt-0 flex items-center justify-between sm:justify-end space-x-4 sm:space-x-6">
+                      <div className="flex items-center border border-gray-200 dark:border-gray-600 rounded-xl px-2 sm:px-3 py-1 bg-white dark:bg-gray-800">
+                        <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="p-1 text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400">-</button>
+                        <span className="mx-2 sm:mx-4 font-bold text-gray-900 dark:text-gray-100 w-4 text-center">{item.quantity}</span>
+                        <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="p-1 text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400">+</button>
                       </div>
-                      <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-600 transition-colors">
+                      <button onClick={() => removeFromCart(item.id)} className="text-red-500 dark:text-red-400 hover:text-red-600 dark:hover:text-red-500 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                         </svg>
@@ -75,9 +75,9 @@ const CartView: React.FC = () => {
         </div>
 
         {/* Summary */}
-        <div className="mt-16 lg:mt-0 lg:col-span-4 sticky top-24">
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
+        <div className="mt-16 lg:mt-0 lg:col-span-4 lg:sticky lg:top-24">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 sm:p-8">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6">Order Summary</h2>
             <div className="space-y-4">
               <div className="flex justify-between text-base text-gray-600">
                 <p>Subtotal</p>
@@ -119,3 +119,5 @@ const CartView: React.FC = () => {
 };
 
 export default CartView;
+
+

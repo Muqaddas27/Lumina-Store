@@ -44,7 +44,7 @@ const CheckoutView: React.FC = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-20 text-center">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Your cart is empty</h2>
         <Link to="/" className="text-indigo-600 dark:text-indigo-400 mt-4 block">Return Home</Link>
       </div>
@@ -52,10 +52,10 @@ const CheckoutView: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+    <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 lg:py-16 overflow-x-hidden">
       <div className="lg:grid lg:grid-cols-2 lg:gap-x-16">
         <div>
-          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-8">Shipping Details</h2>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-8">Shipping Details</h2>
           <form onSubmit={handleCheckout} className="space-y-6">
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
               <div className="sm:col-span-2">
@@ -141,3 +141,5 @@ const CheckoutView: React.FC = () => {
 };
 
 export default CheckoutView;
+
+

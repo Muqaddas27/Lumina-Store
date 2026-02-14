@@ -50,13 +50,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       <div className="p-5">
-        <div className="flex justify-between items-start mb-2">
-          <Link to={`/products/${product.slug}`}>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+        <div className="flex justify-between items-start gap-2 mb-2">
+          <Link to={`/products/${product.slug}`} className="flex-1 min-w-0">
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2">
               {product.name}
             </h3>
           </Link>
-          <div className="flex items-center">
+          <div className="flex items-center flex-shrink-0">
             <span className="text-yellow-400 text-xs">★</span>
             <span className="text-gray-500 dark:text-gray-400 text-xs ml-1 font-medium">{product.rating}</span>
           </div>
