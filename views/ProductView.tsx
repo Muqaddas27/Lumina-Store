@@ -8,7 +8,7 @@ import ProductCard from '../components/ProductCard';
 const ProductView: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const product = INITIAL_PRODUCTS.find(p => p.slug === slug);
-  const { addToCart } = useStore();
+  const { addToCart, toggleWishlist, wishlist } = useStore();
   const [activeImage, setActiveImage] = useState(0);
 
   if (!product) {
@@ -20,6 +20,7 @@ const ProductView: React.FC = () => {
     );
   }
 
+  const isInWishlist = wishlist.some(p => p.id === product.id);
   const relatedProducts = INITIAL_PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
 
   return (
@@ -88,9 +89,17 @@ const ProductView: React.FC = () => {
             >
               Add to Cart
             </button>
-            <button className="p-4 rounded-xl border border-gray-200 text-gray-400 hover:text-red-500 hover:border-red-500 transition-all active:scale-90">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            <button 
+              onClick={() => toggleWishlist(product)}
+              className={`p-4 rounded-xl border transition-all active:scale-90 ${
+                isInWishlist 
+                  ? 'border-red-500 text-red-500 bg-red-50 dark:bg-red-900/20' 
+                  : 'border-gray-200 dark:border-gray-600 text-gray-400 dark:text-gray-500 hover:text-red-500 hover:border-red-500'
+              }`}
+              aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill={isInWishlist ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </button>
           </div>

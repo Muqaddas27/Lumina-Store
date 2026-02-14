@@ -33,16 +33,19 @@ const CategoryView: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 mb-10 overflow-hidden relative shadow-sm border border-gray-100 dark:border-gray-700">
-        <div className="relative z-10 max-w-xl">
-          <h1 className="text-4xl font-extrabold text-gray-900 dark:text-gray-100 capitalize mb-4">{category.name}</h1>
-          <p className="text-gray-500 dark:text-gray-400 text-lg">Browse our latest collection in {category.name}. From premium essentials to daily favorites.</p>
+      <div className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden mb-10 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="relative h-64 md:h-80">
+          <img 
+            src={category.image} 
+            alt={category.name} 
+            className="absolute inset-0 w-full h-full object-cover" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+          <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-12">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white capitalize mb-4">{category.name}</h1>
+            <p className="text-gray-200 text-lg max-w-2xl">Browse our latest collection in {category.name}. From premium essentials to daily favorites.</p>
+          </div>
         </div>
-        <img 
-          src={category.image} 
-          alt={category.name} 
-          className="absolute right-0 top-0 h-full w-1/3 object-cover opacity-10 blur-sm pointer-events-none" 
-        />
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
