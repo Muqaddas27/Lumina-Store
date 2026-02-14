@@ -1,0 +1,9 @@
+
+{
+  "name": "Lumina E-Commerce Pro",
+  "description": "A production-ready e-commerce platform with AI integration, admin dashboard, and full shopping experience.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
