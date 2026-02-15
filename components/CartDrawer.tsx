@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import SafeImage from './SafeImage';
 import { useTheme } from '../lib/ThemeContext';
 
 const CartDrawer: React.FC = () => {
@@ -121,7 +122,7 @@ const CartDrawer: React.FC = () => {
                       <div className="flex gap-4">
                         {/* Product Image */}
                         <div className="flex-shrink-0 w-20 h-20 relative">
-                          <img 
+                          <SafeImage 
                             src={item.images[0]} 
                             alt={item.name} 
                             className="w-full h-full object-cover rounded-lg border border-gray-200 dark:border-gray-700 group-hover:border-indigo-400 dark:group-hover:border-indigo-500 transition-all duration-200" 

@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { CATEGORIES, INITIAL_PRODUCTS } from '../lib/constants';
 import ProductCard from '../components/ProductCard';
+import SafeImage from '../components/SafeImage';
 
 const CategoryView: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -35,7 +36,7 @@ const CategoryView: React.FC = () => {
     <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 py-10 overflow-x-hidden">
       <div className="bg-white dark:bg-gray-800 rounded-2xl md:rounded-3xl overflow-hidden mb-10 shadow-sm border border-gray-100 dark:border-gray-700">
         <div className="relative h-48 sm:h-64 md:h-80">
-          <img 
+          <SafeImage 
             src={category.image} 
             alt={category.name} 
             className="absolute inset-0 w-full h-full object-cover" 
@@ -85,7 +86,12 @@ const CategoryView: React.FC = () => {
           <div className="bg-indigo-50 p-6 rounded-2xl border border-indigo-100">
             <h4 className="text-indigo-900 font-bold mb-2">Need help?</h4>
             <p className="text-indigo-700 text-sm mb-4">Our AI assistant can help you find the perfect product.</p>
-            <button className="text-indigo-600 font-bold text-sm hover:underline">Chat Now</button>
+            <button
+              className="text-indigo-600 font-bold text-sm hover:underline"
+              onClick={() => window.dispatchEvent(new Event('lumina:open-chat'))}
+            >
+              Chat Now
+            </button>
           </div>
         </aside>
 

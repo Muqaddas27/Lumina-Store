@@ -20,9 +20,9 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Montserrat', sans-serif; }
         .glass-morphism {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
@@ -31,7 +31,27 @@
         .dark .glass-morphism {
             background: rgba(31, 41, 55, 0.7);
         }
+        /* Prevent theme flash on reload */
+        html.dark {
+            color-scheme: dark;
+        }
+        html {
+            color-scheme: light;
+        }
     </style>
+    <script>
+        // Apply theme preference immediately to prevent flash
+        (function() {
+            const stored = localStorage.getItem('theme');
+            const isDark = stored === 'dark' || 
+                          (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
 <script type="importmap">
 {
   "imports": {

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../types';
 import { useStore } from '../store/useStore';
+import SafeImage from './SafeImage';
 
 interface ProductCardProps {
   product: Product;
@@ -16,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
       <div className="aspect-square overflow-hidden bg-gray-200 dark:bg-gray-700">
         <Link to={`/products/${product.slug}`}>
-          <img
+          <SafeImage
             src={product.images[0]}
             alt={product.name}
             className="h-full w-full object-cover object-center group-hover:scale-110 transition-transform duration-500"

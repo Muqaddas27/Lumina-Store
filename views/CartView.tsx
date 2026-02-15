@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import SafeImage from '../components/SafeImage';
 
 const CartView: React.FC = () => {
   const { cart, removeFromCart, updateQuantity } = useStore();
@@ -38,7 +39,7 @@ const CartView: React.FC = () => {
             {cart.map((item) => (
               <li key={item.id} className="flex py-8 sm:py-10">
                 <div className="flex-shrink-0 w-24 sm:w-32 aspect-square rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
-                  <img src={item.images[0]} alt={item.name} className="w-full h-full object-center object-cover" />
+                  <SafeImage src={item.images[0]} alt={item.name} className="w-full h-full object-center object-cover" />
                 </div>
 
                 <div className="ml-6 flex-1 flex flex-col justify-between">

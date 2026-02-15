@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import SafeImage from '../components/SafeImage';
 
 const CheckoutView: React.FC = () => {
   const { cart, placeOrder, user } = useStore();
@@ -109,7 +110,7 @@ const CheckoutView: React.FC = () => {
               {cart.map((item) => (
                 <li key={item.id} className="py-4 flex items-center">
                   <div className="w-16 h-16 rounded-xl overflow-hidden border border-gray-100 bg-white">
-                    <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
+                    <SafeImage src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="ml-4 flex-grow">
                     <p className="text-sm font-bold text-gray-900">{item.name}</p>

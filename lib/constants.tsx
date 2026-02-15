@@ -8,10 +8,11 @@ export const CATEGORIES: Category[] = [
   { id: '3', name: 'Home & Living', slug: 'home', image: 'https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&q=80&w=800' },
   { id: '4', name: 'Accessories', slug: 'accessories', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800' },
   { id: '5', name: 'Food', slug: 'food', image: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=800' },
+  { id: '6', name: 'Sports & Outdoors', slug: 'sports', image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80&w=800' },
 ];
 
-// Large product catalog with 180 products across all categories
-// 30 Electronics, 30 Fashion, 30 Home & Living, 30 Accessories, 60 Food
+// Large product catalog with products across all categories
+// Includes: Electronics, Fashion, Home & Living, Accessories, Food, Sports & Outdoors
 export const INITIAL_PRODUCTS: Product[] = PRODUCT_CATALOG;
 
 export const MOCK_USER: User = {

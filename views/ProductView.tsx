@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { INITIAL_PRODUCTS } from '../lib/constants';
 import { useStore } from '../store/useStore';
 import ProductCard from '../components/ProductCard';
+import SafeImage from '../components/SafeImage';
 
 const ProductView: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -37,7 +38,7 @@ const ProductView: React.FC = () => {
         {/* Image Gallery */}
         <div className="flex flex-col">
           <div className="aspect-square bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700">
-            <img 
+            <SafeImage 
               src={product.images[activeImage] || product.images[0]} 
               alt={product.name} 
               className="w-full h-full object-center object-cover"
@@ -51,7 +52,7 @@ const ProductView: React.FC = () => {
                   onClick={() => setActiveImage(idx)}
                   className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-indigo-600' : 'border-transparent'}`}
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <SafeImage src={img} alt={`${product.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>

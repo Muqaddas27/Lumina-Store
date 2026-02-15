@@ -1,5 +1,6 @@
 
 import React from 'react';
+import SafeImage from '../components/SafeImage';
 
 const AboutView: React.FC = () => {
   const values = [
@@ -24,7 +25,7 @@ const AboutView: React.FC = () => {
     <div className="pb-20 bg-white dark:bg-gray-950 transition-colors duration-300 overflow-x-hidden">
       {/* Hero */}
       <section className="relative h-[300px] sm:h-[400px] flex items-center justify-center text-center overflow-hidden">
-        <img 
+        <SafeImage 
           src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=2000" 
           className="absolute inset-0 w-full h-full object-cover" 
           alt="Team collaboration" 
@@ -54,7 +55,7 @@ const AboutView: React.FC = () => {
             </p>
           </div>
           <div className="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl md:rotate-2">
-            <img 
+            <SafeImage 
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200" 
               alt="Office interior" 
               className="w-full h-full object-cover"

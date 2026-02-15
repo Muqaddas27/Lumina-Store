@@ -2,6 +2,7 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import SafeImage from '../components/SafeImage';
 
 const OrderConfirmationView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,7 +32,7 @@ const OrderConfirmationView: React.FC = () => {
             {order.items.map((item) => (
               <div key={item.id} className="flex justify-between items-center gap-4">
                 <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
-                  <img src={item.images[0]} className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover flex-shrink-0" />
+                  <SafeImage src={item.images[0]} className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover flex-shrink-0" alt={item.name} />
                   <div className="min-w-0">
                     <p className="font-bold text-sm text-gray-900 dark:text-gray-100 truncate">{item.name}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">Quantity: {item.quantity}</p>

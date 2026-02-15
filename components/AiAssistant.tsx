@@ -17,6 +17,12 @@ const AiAssistant: React.FC = () => {
     }
   }, [messages]);
 
+  useEffect(() => {
+    const handleOpenChat = () => setIsOpen(true);
+    window.addEventListener('lumina:open-chat', handleOpenChat);
+    return () => window.removeEventListener('lumina:open-chat', handleOpenChat);
+  }, []);
+
   const handleSend = async () => {
     if (!input.trim()) return;
     

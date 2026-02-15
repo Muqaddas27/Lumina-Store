@@ -6,11 +6,12 @@ import ProductCard from '../components/ProductCard';
 
 const SearchView: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('q') || '';
-  const [searchTerm, setSearchTerm] = useState(query);
+  const query = searchParams.get('q');
+  const [searchTerm, setSearchTerm] = useState(query || '');
 
   const results = useMemo(() => {
-    if (!query) return [];
+    // If no query or empty query, show all products
+    if (!query || query.trim() === '') return INITIAL_PRODUCTS;
     return INITIAL_PRODUCTS.filter(p => 
       p.name.toLowerCase().includes(query.toLowerCase()) || 
       p.description.toLowerCase().includes(query.toLowerCase()) ||
@@ -43,9 +44,14 @@ const SearchView: React.FC = () => {
         </form>
       </div>
 
-      {!query ? (
-        <div className="text-center py-20 bg-white dark:bg-gray-800 rounded-3xl border border-dashed border-gray-200 dark:border-gray-700">
-          <p className="text-gray-500 dark:text-gray-400">Enter a search term to find products.</p>
+      {!query || query.trim() === '' ? (
+        <div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">All Products ({results.length})</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {results.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
       ) : results.length === 0 ? (
         <div className="text-center py-20 bg-white dark:bg-gray-800 rounded-3xl border border-dashed border-gray-300 dark:border-gray-600">

@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CATEGORIES, INITIAL_PRODUCTS } from '../lib/constants';
 import ProductCard from '../components/ProductCard';
+import SafeImage from '../components/SafeImage';
 
 const HomeView: React.FC = () => {
   const [email, setEmail] = React.useState('');
@@ -27,7 +28,7 @@ const HomeView: React.FC = () => {
       {/* Hero Section */}
       <section className="relative h-[500px] md:h-[600px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
+          <SafeImage 
             src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=2000" 
             alt="Hero Background" 
             className="w-full h-full object-cover"
@@ -75,7 +76,7 @@ const HomeView: React.FC = () => {
               to={`/category/${cat.slug}`}
               className="group relative h-64 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
             >
-              <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <SafeImage src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6">
                 <h3 className="text-xl font-bold text-white">{cat.name}</h3>

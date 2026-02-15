@@ -1,10 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { useTheme } from '../lib/ThemeContext';
 import { getAvatarFallback, getAvatarBackgroundColor } from '../lib/avatarUtils';
 import { CATEGORIES } from '../lib/constants';
+import SafeImage from './SafeImage';
 
 const Header: React.FC = () => {
   const { cart, user, wishlist, toggleCart, logout } = useStore();
@@ -13,6 +14,24 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
+
+  // Close mobile menu and search on navigation
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsSearchOpen(false);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const wishlistCount = wishlist.length;
@@ -33,7 +52,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-md will-change-none">
         {/* Top Bar */}
         <div className="bg-indigo-600 dark:bg-indigo-700 text-white text-center py-2 text-xs sm:text-sm font-medium">
           <span className="block truncate px-2">Free shipping on orders over $150 | 30-Day Returns</span>
@@ -85,7 +104,7 @@ const Header: React.FC = () => {
                         className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-lg transition-all duration-200 group/item"
                       >
                         <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 ring-2 ring-gray-100 dark:ring-gray-700 group-hover/item:ring-indigo-400 dark:group-hover/item:ring-indigo-500 transition-all">
-                          <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+                          <SafeImage src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
                         </div>
                         <span className="font-semibold text-sm text-gray-800 dark:text-gray-200 group-hover/item:text-indigo-600 dark:group-hover/item:text-indigo-400 transition-colors">{cat.name}</span>
                       </Link>
@@ -170,39 +189,75 @@ const Header: React.FC = () => {
               {/* User Menu */}
               {user ? (
                 <div className="relative group">
-                  <button className="flex items-center space-x-2 p-1 focus:outline-none">
-                    <div className={`h-8 w-8 rounded-full border-2 border-gray-200 dark:border-gray-600 flex items-center justify-center text-xs font-bold text-white ${getAvatarBackgroundColor(user.name)}`}>
-                      {user.image ? (
-                        <img src={user.image} alt={user.name} className="h-full w-full rounded-full object-cover" />
-                      ) : (
-                        getAvatarFallback(user.name)
-                      )}
+                  <button className="flex items-center space-x-2 p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all focus:outline-none">
+                    <div className={`h-9 w-9 rounded-full border-2 border-gray-200 dark:border-gray-600 flex items-center justify-center text-xs font-bold text-white flex-shrink-0 shadow-md ${getAvatarBackgroundColor(user.name)}`}>
+                      {getAvatarFallback(user.name)}
                     </div>
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 hidden xl:block">{user.name.split(' ')[0]}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400 dark:text-gray-500 hidden xl:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 hidden xl:block">{user.name.split(' ')[0]}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-500 dark:text-gray-400 hidden xl:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  <div className="absolute right-0 w-56 mt-2 py-2 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50">
-                    <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
-                      <p className="text-sm font-bold text-gray-900 dark:text-gray-100">{user.name}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{user.email}</p>
+                  
+                  {/* Enhanced Dropdown Menu */}
+                  <div className="absolute right-0 w-80 mt-2 p-4 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100]">
+                    <h3 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3 px-2">Account Menu</h3>
+                    
+                    {/* User Info Card */}
+                    <div className="mb-3 p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-md">
+                      <div className="flex items-center gap-3">
+                        <div className={`h-12 w-12 rounded-full flex items-center justify-center text-base font-bold text-white flex-shrink-0 shadow-lg ${getAvatarBackgroundColor(user.name)}`}>
+                          {getAvatarFallback(user.name)}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{user.name}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 truncate">{user.email}</p>
+                        </div>
+                      </div>
                     </div>
-                    {user.role === 'ADMIN' && (
-                      <Link to="/admin" className="block px-4 py-2 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 font-bold">
-                        <span className="flex items-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+
+                    {/* Menu Items */}
+                    <div className="space-y-1">
+                      {user.role === 'ADMIN' && (
+                        <Link to="/admin" className="flex items-center gap-3 p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md transition-all duration-200 group/item">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-600 dark:text-indigo-400 group-hover/item:scale-110 transition-transform flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                           </svg>
-                          Admin Dashboard
-                        </span>
+                          <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">Admin</span>
+                        </Link>
+                      )}
+                      
+                      <Link to="/account" className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md transition-all duration-200 group/item">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-hover/item:text-indigo-600 dark:group-hover/item:text-indigo-400 transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover/item:text-indigo-600 dark:group-hover/item:text-indigo-400 transition-colors">My Profile</span>
                       </Link>
-                    )}
-                    <Link to="/account" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30">My Profile</Link>
-                    <Link to="/account/orders" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30">My Orders</Link>
-                    <Link to="/wishlist" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30">Wishlist</Link>
-                    <button onClick={logout} className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 border-t border-gray-100 dark:border-gray-700 mt-1">
-                      Logout
+                      
+                      <Link to="/account/orders" className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md transition-all duration-200 group/item">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-hover/item:text-indigo-600 dark:group-hover/item:text-indigo-400 transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover/item:text-indigo-600 dark:group-hover/item:text-indigo-400 transition-colors">My Orders</span>
+                      </Link>
+                      
+                      <Link to="/wishlist" className="flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-600 hover:shadow-md transition-all duration-200 group/item">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-hover/item:text-red-500 transition-colors flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover/item:text-red-500 transition-colors">Wishlist</span>
+                      </Link>
+                    </div>
+
+                    {/* Logout Button */}
+                    <button 
+                      onClick={logout}
+                      className="mt-4 flex items-center justify-center gap-2 w-full px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-xl transition-all shadow-md hover:shadow-xl transform hover:-translate-y-0.5"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                      </svg>
+                      <span>Logout</span>
                     </button>
                   </div>
                 </div>
@@ -283,7 +338,7 @@ const Header: React.FC = () => {
                 <div className="flex items-center space-x-3 p-4 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl mb-6">
                   <div className={`h-12 w-12 rounded-full border-2 border-indigo-200 dark:border-indigo-600 flex items-center justify-center text-sm font-bold text-white ${getAvatarBackgroundColor(user.name)}`}>
                     {user.image ? (
-                      <img src={user.image} alt={user.name} className="h-full w-full rounded-full object-cover" />
+                      <SafeImage src={user.image} alt={user.name} className="h-full w-full rounded-full object-cover" />
                     ) : (
                       getAvatarFallback(user.name)
                     )}
@@ -309,7 +364,7 @@ const Header: React.FC = () => {
                       onClick={closeMobileMenu}
                       className="flex items-center px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                     >
-                      <img src={cat.image} alt={cat.name} className="w-8 h-8 rounded-lg mr-3 object-cover" />
+                      <SafeImage src={cat.image} alt={cat.name} className="w-8 h-8 rounded-lg mr-3 object-cover" />
                       <span className="font-medium">{cat.name}</span>
                     </Link>
                   ))}

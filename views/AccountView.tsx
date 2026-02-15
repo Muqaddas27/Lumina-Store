@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import SafeImage from '../components/SafeImage';
 
 const AccountView: React.FC = () => {
   const { user, logout } = useStore();
@@ -17,7 +18,7 @@ const AccountView: React.FC = () => {
         <nav className="w-full md:w-64 space-y-2 flex-shrink-0">
           <div className="flex items-center space-x-3 px-4 mb-6 md:mb-8">
             <div className="w-12 h-12 rounded-full border border-gray-200 dark:border-gray-600 flex items-center justify-center text-sm font-bold text-white bg-indigo-600">
-              {user.image ? <img src={user.image} className="w-full h-full rounded-full object-cover" alt={user.name} /> : user.name.charAt(0).toUpperCase()}
+              {user.image ? <SafeImage src={user.image} className="w-full h-full rounded-full object-cover" alt={user.name} /> : user.name.charAt(0).toUpperCase()}
             </div>
             <div>
               <p className="font-bold text-gray-900 dark:text-gray-100 leading-none">{user.name}</p>
@@ -57,7 +58,7 @@ const ProfileOverview = ({ user }: { user: any }) => (
       <div className="space-y-6">
         <div className="flex items-center space-x-4">
           <div className="w-20 h-20 rounded-full border-2 border-indigo-100 dark:border-indigo-600 flex items-center justify-center text-lg font-bold text-white bg-indigo-600 overflow-hidden">
-            {user.image ? <img src={user.image} alt={user.name} className="w-full h-full object-cover" /> : user.name.charAt(0).toUpperCase()}
+            {user.image ? <SafeImage src={user.image} alt={user.name} className="w-full h-full object-cover" /> : user.name.charAt(0).toUpperCase()}
           </div>
           <div>
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">{user.name}</h3>
@@ -148,7 +149,7 @@ const EditProfile = ({ user }: { user: any }) => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="flex items-center space-x-6 pb-6 border-b border-gray-100">
-          <img src={formData.image || user.image} alt={formData.name} className="w-24 h-24 rounded-full border-4 border-indigo-100 object-cover" />
+          <SafeImage src={formData.image || user.image} alt={formData.name} className="w-24 h-24 rounded-full border-4 border-indigo-100 object-cover" />
           <div className="flex-1">
             <label className="block text-sm font-bold text-gray-700 mb-2">Profile Picture URL</label>
             <input
@@ -273,7 +274,7 @@ const OrdersList = () => {
                 {order.items.map((item) => (
                   <div key={item.id} className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <img src={item.images[0]} className="w-12 h-12 rounded-lg object-cover border border-gray-200" />
+                      <SafeImage src={item.images[0]} className="w-12 h-12 rounded-lg object-cover border border-gray-200" alt={item.name} />
                       <div>
                         <p className="text-sm font-bold">{item.name}</p>
                         <p className="text-xs text-gray-500">Qty: {item.quantity}</p>

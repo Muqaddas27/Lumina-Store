@@ -2,7 +2,103 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { CartItem, Product, User, UserRole, Order } from '../types';
-import { MOCK_USER } from '../lib/constants';
+import { MOCK_USER, INITIAL_PRODUCTS } from '../lib/constants';
+
+// Mock orders for admin dashboard
+const MOCK_ORDERS: Order[] = [
+  {
+    id: 'LUM-5421',
+    userId: MOCK_USER.id,
+    items: [
+      { ...INITIAL_PRODUCTS[0], quantity: 2 },
+      { ...INITIAL_PRODUCTS[1], quantity: 1 },
+    ],
+    total: INITIAL_PRODUCTS[0].price * 2 + INITIAL_PRODUCTS[1].price,
+    status: 'PROCESSING',
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    paymentMethod: 'credit_card',
+    shippingAddress: {
+      fullName: 'Ahmed Hassan',
+      street: '123 Main Street',
+      city: 'Karachi',
+      zipCode: '75500',
+      country: 'Pakistan',
+    },
+  },
+  {
+    id: 'LUM-5420',
+    userId: 'user-2',
+    items: [
+      { ...INITIAL_PRODUCTS[2], quantity: 1 },
+    ],
+    total: INITIAL_PRODUCTS[2].price,
+    status: 'DELIVERED',
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    paymentMethod: 'debit_card',
+    shippingAddress: {
+      fullName: 'Fatima Khan',
+      street: '456 Oak Avenue',
+      city: 'Lahore',
+      zipCode: '54000',
+      country: 'Pakistan',
+    },
+  },
+  {
+    id: 'LUM-5419',
+    userId: 'user-3',
+    items: [
+      { ...INITIAL_PRODUCTS[3], quantity: 3 },
+    ],
+    total: INITIAL_PRODUCTS[3].price * 3,
+    status: 'SHIPPED',
+    createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+    paymentMethod: 'credit_card',
+    shippingAddress: {
+      fullName: 'Ali Raza',
+      street: '789 Elm Street',
+      city: 'Islamabad',
+      zipCode: '44000',
+      country: 'Pakistan',
+    },
+  },
+  {
+    id: 'LUM-5418',
+    userId: 'user-4',
+    items: [
+      { ...INITIAL_PRODUCTS[4], quantity: 1 },
+      { ...INITIAL_PRODUCTS[5], quantity: 2 },
+    ],
+    total: INITIAL_PRODUCTS[4].price + INITIAL_PRODUCTS[5].price * 2,
+    status: 'PENDING',
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    paymentMethod: 'credit_card',
+    shippingAddress: {
+      fullName: 'Zainab Ahmed',
+      street: '321 Pine Road',
+      city: 'Rawalpindi',
+      zipCode: '46000',
+      country: 'Pakistan',
+    },
+  },
+  {
+    id: 'LUM-5417',
+    userId: 'user-5',
+    items: [
+      { ...INITIAL_PRODUCTS[6], quantity: 1 },
+    ],
+    total: INITIAL_PRODUCTS[6].price,
+    status: 'DELIVERED',
+    createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+    paymentMethod: 'debit_card',
+    shippingAddress: {
+      fullName: 'Hassan Malik',
+      street: '654 Maple Lane',
+      city: 'Multan',
+      zipCode: '60000',
+      country: 'Pakistan',
+    },
+  },
+];
 
 interface AppState {
   user: User | null;
@@ -35,7 +131,7 @@ export const useStore = create<AppState>()(
     (set) => ({
       user: null,
       cart: [],
-      orders: [],
+      orders: MOCK_ORDERS,
       wishlist: [],
       isCartOpen: false,
 
